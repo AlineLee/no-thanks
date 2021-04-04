@@ -194,7 +194,7 @@ function App() {
         )}
 
         {finished && (
-          <button onClick={() => init()}>Init</button>
+          <button data-testid='init' onClick={() => init()}>Init</button>
         )}
       </main>
     </div>

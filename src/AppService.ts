@@ -31,7 +31,6 @@ export const splitPlayerDeck = (player: PlayerType): CardType[][] => {
       subDecks[number].push(item);
       return;
     };
-    console.log(item.number)
     number++;
     subDecks[number] = [];
     subDecks[number].push(item);
