@@ -37,3 +37,48 @@ export const splitPlayerDeck = (player: PlayerType): CardType[][] => {
   });
   return subDecks;
 };
+
+const deck: CardType[] = [
+  { number: 3, color: 'red' },
+  { number: 4, color: 'red' },
+  { number: 5, color: 'red' },
+  { number: 6, color: 'red' },
+  { number: 7, color: 'red' },
+  { number: 8, color: 'red' },
+  { number: 9, color: 'red' },
+  { number: 10, color: 'red' },
+  { number: 11, color: 'red' },
+  { number: 12, color: 'red' },
+  { number: 13, color: 'red' },
+  { number: 14, color: 'red' },
+  { number: 15, color: 'red' },
+  { number: 16, color: 'red' },
+  { number: 17, color: 'red' },
+  { number: 18, color: 'red' },
+  { number: 19, color: 'red' },
+  { number: 20, color: 'red' },
+  { number: 21, color: 'red' },
+  { number: 22, color: 'red' },
+  { number: 23, color: 'red' },
+  { number: 24, color: 'red' },
+  { number: 25, color: 'red' },
+  { number: 26, color: 'red' },
+  { number: 27, color: 'red' },
+  { number: 28, color: 'red' },
+  { number: 29, color: 'red' },
+  { number: 30, color: 'red' },
+  { number: 31, color: 'red' },
+  { number: 32, color: 'red' },
+  { number: 33, color: 'red' },
+  { number: 34, color: 'red' },
+  { number: 35, color: 'red' },
+];
+
+export const getShuffledDeck = () : CardType[] => {
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  const limitedDeck = deck.splice(9, deck.length - 1);
+  return limitedDeck;
+};

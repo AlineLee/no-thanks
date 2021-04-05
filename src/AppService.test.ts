@@ -1,4 +1,4 @@
-import { calcScore, splitPlayerDeck } from './AppService';
+import { calcScore, splitPlayerDeck, getShuffledDeck } from './AppService';
 
 describe('calcScore', () => {
   const cards = [
@@ -200,5 +200,12 @@ describe('splitPlayerDeck', () => {
       const subject = splitPlayerDeck(player);
       expect(subject).toStrictEqual([]);
     });
+  });
+});
+
+describe('getShuffledDeck', () => {
+  test('should return the shuffed cards without 9 cards', () => {
+    const subject = getShuffledDeck();
+    expect(subject.length).toBe(24);
   });
 });
