@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import './App.css';
 
 import { calcScore, splitPlayerDeck, getShuffledDeck, PlayerType, CardType } from './AppService';
+import Players from './components/Players';
+import Table from './components/Table';
+import PlayerActions from './components/PlayerActions';
 
 const Page = styled('div')`
   height: 100vh;
@@ -10,11 +13,6 @@ const Page = styled('div')`
   grid-template-rows: auto 1fr auto;
   text-align: center;
   background-color: #bed1bf;
-`;
-
-const Actions = styled('div')`
-  display: flex;
-  justify-content: space-around;
 `;
 
 const Button = styled('button')`
@@ -25,63 +23,9 @@ const Button = styled('button')`
   padding: 5px 10px;
 `;
 
-const Card = styled('li')`
-  display: inline-block;
-  padding: 10px;
-  border: solid 1px;
-  border-radius: 3px;
-  background-color: white;
-  text-align: left;
-  position: relative;
-  margin-bottom: -10px;
-  margin-left: -70px;
-`;
-
-const CardCore = styled('span')`
-  padding: 10px;
-  background-color: #f36380;
-  display: block;
-  color: white;
-  font-size: 35px;
-  width: 80px;
-  margin-bottom: -1px;
-`;
-
-const Deck = styled('ul')`
-  display: block;
-  padding: 0;
-  margin-left: 70px;
-`;
-
 const Turn = styled('div')`
   background-color: #f36380;
   padding: 10px 0;
-`;
-
-const UpsideDown = styled('div')`
-  transform: rotate(180deg);
-`;
-
-const Players = styled('ul')`
-  display: block;
-  padding: 0;
-`;
-
-const Player = styled('li')`
-  margin-top: 10px;
-`;
-
-const Table = styled('ul')`
-  display: block;
-  padding: 30px 0;
-  background-color: #607d8b;
-  margin: 0;
-`;
-
-const Sequence = styled('ul')`
-  display: inline-block;
-  margin-bottom: 5px;
-  margin-top: 10px;
 `;
 
 const Header = styled('header')`
@@ -182,70 +126,13 @@ function App() {
       <main>
         <Turn>Turn {turn}</Turn>
 
-        {tableCards.length > 0 && (
-          <Table>
-            <p>Coins: {tableCoins}</p>
-            {tableCards.length > 0 && (
-              <Deck>
-                {tableCards.map((item) => (
-                  <Card key={item.number}>
-                    {item.number.toString().padStart(2, '0')}
-                    <CardCore>
-                      {item.number.toString().padStart(2, '0')}
-                    </CardCore>
-                    <UpsideDown>
-                      {item.number.toString().padStart(2, '0')}
-                      <CardCore>
-                        {item.number.toString().padStart(2, '0')}
-                      </CardCore>
-                    </UpsideDown>
-                  </Card>
-                ))}
-              </Deck>
-            )}
-          </Table>
-        )}
+        <Table coins={tableCoins} cards={tableCards} />
 
         {!finished && player && (
-          <>
-            <p>Its your turn {player.name}</p>
-            <Actions>
-              <Button onClick={() => handleCardsOrder({ player, payToPass: false })}>
-                Yes, please
-              </Button>
-              {player.coins > 0 && (
-                <Button onClick={() => handleCardsOrder({ player, payToPass: true })}>
-                  No, thanks
-                </Button>
-              )}
-            </Actions>
-          </>
+          <PlayerActions player={player} handleCardsOrder={handleCardsOrder} />
         )}
 
-        <Players>
-          {players && players.map((item) => (
-            <Player key={item.id}>
-              {item.name} - Coins {item.coins} ({item.score})
-
-              {item.orderedCards && item.orderedCards.length > 0 && (
-                <ul>
-                  {item.orderedCards.map((orderedCards) => (
-                    <Sequence>
-                      {orderedCards.map((card) => (
-                        <Card key={`ord-${card.number}`}>
-                          {card.number.toString().padStart(2, '0')}
-                          <CardCore>
-                            {card.number.toString().padStart(2, '0')}
-                          </CardCore>
-                        </Card>
-                      ))}
-                    </Sequence>
-                  ))}
-                </ul>
-              )}
-            </Player>
-          ))}
-        </Players>
+        <Players list={players} />
 
         {finished && (
           <Button data-testid='init' onClick={() => init()}>Start</Button>
