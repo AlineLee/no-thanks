@@ -6,33 +6,38 @@ import { calcScore, splitPlayerDeck, getShuffledDeck, PlayerType, CardType } fro
 import Players from './components/Players';
 import Table from './components/Table';
 import PlayerActions from './components/PlayerActions';
+import Button from './components/Button';
 
 const Page = styled('div')`
   height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr auto auto;
   text-align: center;
-  background-color: #bed1bf;
-`;
-
-const Button = styled('button')`
-  font-family: inherit;
-  background-color: #51c4cc;
-  border: none;
-  border-radius: 3px;
-  padding: 5px 10px;
+  background-color: white;
 `;
 
 const Turn = styled('div')`
-  background-color: #f36380;
-  padding: 10px 0;
+  background-color: #ffe65a;
+  padding: 30px 0;
 `;
 
 const Header = styled('header')`
-  background-color: #51c4cc;
+  background-color: white;
   text-transform: uppercase;
   font-weight: 300;
+  padding: 20px;
+  box-shadow: 0px 5px 5px 0px #0000003b;
+  z-index: 1;
+`;
+
+const Footer = styled('footer')`
+  background-color: #cccfe2;
   padding: 10px;
+`;
+
+const Main = styled('main')`
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 `;
 
 function App() {
@@ -123,22 +128,20 @@ function App() {
   return (
     <Page>
       <Header>no thanks</Header>
-      <main>
-        <Turn>Turn {turn}</Turn>
+      <Main>
+        <Turn>Turn {turn} {player?.name}</Turn>
 
         <Table coins={tableCoins} cards={tableCards} />
-
-        {!finished && player && (
-          <PlayerActions player={player} handleCardsOrder={handleCardsOrder} />
-        )}
-
-        <Players list={players} />
 
         {finished && (
           <Button data-testid='init' onClick={() => init()}>Start</Button>
         )}
-      </main>
-      <div>@alinelee</div>
+        <Players list={players} />
+        {!finished && player && (
+          <PlayerActions player={player} handleCardsOrder={handleCardsOrder} />
+        )}
+      </Main>
+      <Footer>@alinelee</Footer>
     </Page>
   );
 }

@@ -6,18 +6,20 @@ import { CardType } from '../AppService';
 const Container = styled('li')`
   display: inline-block;
   padding: 10px;
-  border: solid 1px;
-  border-radius: 3px;
-  background-color: white;
+  border-radius: 6px;
   text-align: left;
   position: relative;
-  margin-bottom: -10px;
+  margin-bottom: -20px;
   margin-left: -70px;
+  background-color: #f0effd;
+  box-shadow: -1px 1px 5px #0000003b;
 `;
 
 const CardCore = styled('span')`
   padding: 10px;
-  background-color: #f36380;
+  background-color: #8176dd;
+  background-color: #ff7632;
+  border-radius: 6px 6px 0 0;
   display: block;
   color: white;
   font-size: 35px;

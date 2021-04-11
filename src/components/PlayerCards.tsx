@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 import { CardType } from '../AppService';
@@ -10,9 +9,15 @@ const Sequence = styled('ul')`
   margin-top: 10px;
 `;
 
+const Container = styled('ul')`
+  padding: 0;
+  margin: 0;
+  display: block;
+`;
+
 function PlayerCards({cards}: {cards:CardType[][]}) {
   return (
-    <ul>
+    <Container>
       {cards.map((orderedCards) => (
         <Sequence>
           {orderedCards.map((card) => (
@@ -20,7 +25,7 @@ function PlayerCards({cards}: {cards:CardType[][]}) {
           ))}
         </Sequence>
       ))}
-    </ul>
+    </Container>
   );
 };
 
